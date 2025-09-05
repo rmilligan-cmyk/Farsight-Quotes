@@ -127,19 +127,33 @@
             font-size: 16px;
         }
         
-        .product-image {
+        /* Product image styling */
+        .product-image-container {
             width: 100%;
             height: 120px;
-            background: linear-gradient(45deg, #ED9458, #E18B4C);
             border-radius: 8px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            background: white;
+            border: 2px solid #ED9458;
+            overflow: hidden;
+        }
+        
+        .product-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+        
+        .product-image-fallback {
+            color: #ED9458;
             font-weight: bold;
-            margin-bottom: 15px;
             font-size: 14px;
             text-align: center;
+            padding: 10px;
         }
         
         .product-specs {
@@ -247,10 +261,81 @@
             background: #E18B4C;
         }
         
+        /* ENHANCED PRINT STYLES */
         @media print {
-            body { background: white; }
-            .quote-container { box-shadow: none; }
-            .print-btn { display: none; }
+            /* Force print background colors and images */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            body { 
+                background: white !important;
+                margin: 0;
+                padding: 10px;
+            }
+            
+            .quote-container { 
+                box-shadow: none;
+                margin: 0;
+                max-width: none;
+            }
+            
+            .print-btn { 
+                display: none; 
+            }
+            
+            /* Ensure orange colors show in print */
+            .quote-title {
+                background: #737272 !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+            
+            .subtotal-row {
+                background: #ED9458 !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+            
+            .total-row {
+                background: #737272 !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+            
+            .footer {
+                background: #737272 !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+            
+            /* Product images with print-friendly borders */
+            .product-image-container {
+                border: 2px solid #ED9458 !important;
+                background: white !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+            
+            .product-image-fallback {
+                color: #ED9458 !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+            
+            /* Ensure page breaks work well */
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            .pricing-table {
+                page-break-inside: avoid;
+            }
+            
+            /* Force Terms & Conditions to start on new page */
+            .terms {
+                page-break-before: always;
+            }
         }
     </style>
 </head>
@@ -291,10 +376,57 @@
             </div>
 
             <div class="section">
+                <h3>Smart Lighting Showcase</h3>
+                <div style="margin-bottom: 30px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div style="text-align: center;">
+                            <img src="image1.jpg" alt="Living Room Smart Lighting" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 2px solid #737272; margin-bottom: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display: none; width: 100%; height: 180px; border: 3px solid #ED9458; border-radius: 8px; align-items: center; justify-content: center; color: #ED9458; font-weight: bold; margin-bottom: 10px; font-size: 12px; padding: 10px; box-sizing: border-box; background: white;">
+                                Living Room Scene<br><br>Purple & Blue Ambiance<br><br>[Image: image1.jpg]
+                            </div>
+                            <p style="font-size: 14px; color: #737272; margin: 0;">Color-changing mood lighting creates perfect ambiance for any occasion</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <img src="image2.jpg" alt="Dining Room Bulb Comparison" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 2px solid #737272; margin-bottom: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display: none; width: 100%; height: 180px; border: 3px solid #ED9458; border-radius: 8px; align-items: center; justify-content: center; color: #ED9458; font-weight: bold; margin-bottom: 10px; font-size: 12px; padding: 10px; box-sizing: border-box; background: white;">
+                                Dining Room Comparison<br><br>BR30 vs A19 Bulbs<br><br>[Image: image2.jpg]
+                            </div>
+                            <p style="font-size: 14px; color: #737272; margin: 0;">11.5W BR30 (1200lm) vs 9W A19 (800lm) - Choose the right brightness for each area</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <img src="image3.jpg" alt="Multi-Room Lighting Control" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 2px solid #737272; margin-bottom: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display: none; width: 100%; height: 180px; border: 3px solid #ED9458; border-radius: 8px; align-items: center; justify-content: center; color: #ED9458; font-weight: bold; margin-bottom: 10px; font-size: 12px; padding: 10px; box-sizing: border-box; background: white;">
+                                Multi-Room Control<br><br>Unified Lighting System<br><br>[Image: image3.jpg]
+                            </div>
+                            <p style="font-size: 14px; color: #737272; margin: 0;">Control all rooms from one app - pendant lights, alcove, and bar area in perfect harmony</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #ED9458;">
+                        <h4 style="color: #737272; margin-top: 0;">Smart Lighting Benefits:</h4>
+                        <ul style="color: #555; margin-bottom: 0;">
+                            <li><strong>16 Million Colors:</strong> Create any mood from vibrant party scenes to relaxing warm tones</li>
+                            <li><strong>Voice Control:</strong> "Alexa, set lodge lights to dinner mode" - hands-free operation</li>
+                            <li><strong>Schedule Automation:</strong> Lights automatically adjust throughout the day</li>
+                            <li><strong>Music Sync:</strong> Lights pulse and change with your audio for events</li>
+                            <li><strong>Energy Efficient:</strong> LED technology saves up to 80% on electricity costs</li>
+                            <li><strong>Remote Access:</strong> Control lights from anywhere via smartphone app</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
                 <h3>Smart Lighting Products</h3>
                 <div class="product-grid">
                     <div class="product-card">
-                        <div class="product-image">Govee RGBWW Smart BR30 LED Bulbs</div>
+                        <div class="product-image-container">
+                            <img src="https://images-na.ssl-images-amazon.com/images/I/61nYg2JO6kL._AC_SL1500_.jpg" alt="Govee RGBWW Smart BR30 LED Bulbs">
+                            <div class="product-image-fallback" style="display: none;">
+                                Govee RGBWW Smart BR30 LED Bulbs<br>
+                                <small>Color-changing flood lights</small>
+                            </div>
+                        </div>
                         <h4>BR30 Smart Bulbs (13 units)</h4>
                         <ul class="product-specs">
                             <li>1200 Lumens brightness</li>
@@ -307,7 +439,13 @@
                     </div>
                     
                     <div class="product-card">
-                        <div class="product-image">Govee Smart A19 LED Bulbs</div>
+                        <div class="product-image-container">
+                            <img src="https://images-na.ssl-images-amazon.com/images/I/61G6VxJa8hL._AC_SL1500_.jpg" alt="Govee Smart A19 LED Bulbs">
+                            <div class="product-image-fallback" style="display: none;">
+                                Govee Smart A19 LED Bulbs<br>
+                                <small>Standard smart bulbs</small>
+                            </div>
+                        </div>
                         <h4>A19 Smart Bulbs (6 units)</h4>
                         <ul class="product-specs">
                             <li>1000 Lumens brightness</li>
@@ -320,7 +458,13 @@
                     </div>
                     
                     <div class="product-card">
-                        <div class="product-image">GoveeLife Smart Button Switch</div>
+                        <div class="product-image-container">
+                            <img src="https://images-na.ssl-images-amazon.com/images/I/61hL0zJXEOL._AC_SL1500_.jpg" alt="GoveeLife Smart Button Switch">
+                            <div class="product-image-fallback" style="display: none;">
+                                GoveeLife Smart Button Switch<br>
+                                <small>6-button wireless controller</small>
+                            </div>
+                        </div>
                         <h4>6-Button Smart Controller</h4>
                         <ul class="product-specs">
                             <li>6 programmable buttons</li>
@@ -333,7 +477,6 @@
                     </div>
                     
                     <div class="product-card">
-                        <div class="product-image">GoveeLife Smart Button Remote</div>
                         <h4>Single Button Remote</h4>
                         <ul class="product-specs">
                             <li>One-touch automation</li>
@@ -469,5 +612,22 @@
             <p>Professional • Reliable • Smart Home Solutions</p>
         </div>
     </div>
+
+    <script>
+        // Fallback for product images
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.product-image-container img');
+            
+            images.forEach(function(img) {
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    const fallback = this.parentElement.querySelector('.product-image-fallback');
+                    if (fallback) {
+                        fallback.style.display = 'block';
+                    }
+                };
+            });
+        });
+    </script>
 </body>
 </html>
